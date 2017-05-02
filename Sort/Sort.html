@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>排序算法</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/css.css" type="text/css">
+</head>
+<body>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="page-header">
+				<h3>
+					排序算法动画演示 <small> _ Huixin.Hu </small>
+				</h3>
+			</div>
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<ul class="nav nav-pills">
+						<li class="sort active">
+							 <a href="#" onclick="changeSort(11)">选择排序</a>
+						</li>
+						<li  role="presentation" class="sort dropdown">
+					    	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					    	插入排序 <span class="caret"></span>
+					    	</a>
+					    	<ul class="dropdown-menu">
+					     		<li><a href="#" onclick="changeSort(21)">交换法</a></li>
+					     		<li><a href="#" onclick="changeSort(22)">位移法</a></li>
+					    	</ul>
+					  	</li>
+						<li class="sort">
+							 <a href="#" onclick="changeSort(31)">希尔排序</a>
+						</li>
+						<li role="presentation" class="sort dropdown">
+					    	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					    	归并排序 <span class="caret"></span>
+					    	</a>
+					    	<ul class="dropdown-menu">
+					     		<li><a href="#" onclick="changeSort(41)">标准归并</a></li>
+					     		<li><a href="#" onclick="changeSort(42)">逆向归并</a></li>
+					     		<li><a href="#" onclick="changeSort(43)">归并+插入</a></li>
+					    	</ul>
+					  	</li>
+						<li role="presentation" class="sort dropdown">
+					    	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					    	快速排序 <span class="caret"></span>
+					    	</a>
+					    	<ul class="dropdown-menu">
+					     		<li><a href="#" onclick="changeSort(51)">标准切分</a></li>
+					     		<li><a href="#" onclick="changeSort(52)">切分+插入</a></li>
+					     		<li><a href="#" onclick="changeSort(53)">三向切分</a></li>
+					    	</ul>
+					  	</li>
+						<li class="sort">
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row clearfix" style="padding: 20px;">
+				<div class="col-md-12 column">
+					<div class="progress">
+						<div class="progress progress-striped">
+						    <div id="progress" class="progress-bar progress-bar-success" role="progressbar"
+						         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+						         style="width: 0%;">
+						        <span id="progressDesc" class="sr-only">进度0%</span>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div id="main" style="width: 100%;height: 400%;"></div>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-8 column">
+			<div class="form-group" style="padding-top: 8px">
+				 <label for="len" id="showLength" class="col-sm-2 control-label">length : 100</label>
+				<div class="col-sm-10">
+					<input id="len" class="form-control" type="range" min="10" step="10" max="1000" value="100" onchange="changeLen(this.value)"/>
+				</div>
+			</div>
+			<div class="form-group" style="padding-top: 30px">
+				 <label for="time" id="showTime" class="col-sm-2 control-label">time : 100</label>
+				<div class="col-sm-10">
+					<input id="time" class="form-control" type="range" min="10" step="10" max="1000" value="100" onchange="changeTime(this.value)"/>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 column">
+			<div class="alert alert-success alert-dismissable">
+				<h4 style = "text-align: center;">
+					消息栏
+				</h4>
+				<strong>状态:</strong><br/>
+				<strong id="alert">loading...</strong>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-1 column">
+			</div>
+			<div class="col-md-1 column">
+				<button class="run btn btn-success" onclick="reset()">重置</button>
+			</div>
+			<div class="col-md-1 column">
+				<button class="btn btn-success" onclick="beforeSort()">预排序</button>
+			</div>
+			<div class="col-md-1 column">
+				<button class="run btn btn-success" onclick="last()">上一步</button>
+			</div>
+			<div class="col-md-1 column">
+				<button class="run btn btn-success" onclick="next()">下一步</button>
+			</div>
+			<div class="col-md-1 column">
+				<button class="run btn btn-success" onclick="auto()">自己动</button>
+			</div>
+			<div class="col-md-1 column">
+				<button class="btn btn-success" onclick="stop()">停止</button>
+			</div>
+			<div class="col-md-4 column">
+			</div>
+		</div>
+	</div>
+</body>
+<!-- 引入 echarts.js -->
+<script src="./js/Echarts3.js"></script>
+<script src="./js/sort.js"></script>
+<script src="./js/newSort.js"></script>
+<!-- 引入各类排序算法 -->
+<script src="./js/sort/selectSort.js"></script>
+<script src="./js/sort/insertSort.js"></script>
+<script src="./js/sort/shellSort.js"></script>
+<script src="./js/sort/mergeSort.js"></script>
+<script src="./js/sort/quickSort.js"></script>
+</html>
